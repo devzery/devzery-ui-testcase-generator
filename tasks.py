@@ -18,8 +18,6 @@ class TestFlow(BaseModel):
 class TestList(BaseModel):
     test_flows: List[TestFlow] = Field(description="The list of user flows with test cases")
 
-
-
 # ```json
 # [
 #     {
@@ -38,8 +36,6 @@ class TestList(BaseModel):
 #     ... (more user flows)
 # ]
 # ```
-
-
 
 #1st json structure
 # ```json
