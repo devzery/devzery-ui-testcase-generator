@@ -1,10 +1,6 @@
 from bs4 import BeautifulSoup, Comment
-import pprint
 import re
 import tiktoken as tiktoken
-import logging
-import pprint
-import logging
 
 def remove_script_style(soup):
     for script in soup.select('script'):
@@ -41,7 +37,7 @@ def clean_html(html):
 
 def split_string(input):
     """
-    Splits a given input string into substrings of maximum length 4000 tokens.
+    Splits a given input string into substrings of maximum length of x tokens.
 
     Args:
         input (str): The input string to be split.
@@ -61,22 +57,18 @@ def split_string(input):
         else:
             substrings.append(encoding.decode(tokens[:length_to_split]))
             tokens = tokens[length_to_split:]
-    logging.info("substrings: %d", len(substrings))
-    logging.info("substrings Generated")
-    print("Substrings Generated")
     return substrings
 
-import re
 
 def extract_json_code(text):
     """
-    Extracts the JSON code from a given text.
+    Extracts the JSON code from a given markdown Format
 
     Args:
-        text (str): The text containing the JSON code.
+        text (str): The text containing the JSON.
 
     Returns:
-        str or None: The extracted JSON code, or None if no code block is found.
+        str or None: The extracted JSON , or None if no json block is found.
     """
     code_block_pattern = re.compile(r'```json\n(.*?)\n```', re.DOTALL)
     code_blocks = code_block_pattern.findall(text)
@@ -85,8 +77,6 @@ def extract_json_code(text):
     return None
 
 
-# logging.basicConfig(level=logging.INFO, filename='output.log', filemode='w')
-# logging.info(pprint.pformat(split_string(clean_html(html))))
 
 
 

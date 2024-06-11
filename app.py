@@ -1,8 +1,4 @@
-import logging
 from preprocessing import clean_html, split_string ,extract_json_code
-from bs4 import BeautifulSoup
-import os
-import requests
 import tiktoken as tiktoken
 from flask import Flask, jsonify ,request
 from dotenv import load_dotenv
@@ -34,10 +30,7 @@ def htmlagent():
         test_flows_str = crew.kickoff()
         print(test_flows_str)
         test_flows_str=extract_json_code(test_flows_str)
-        # print(type(test_flows_str))
-        # print(len(test_flows_str))
         test_flows = json.loads(test_flows_str)
-        # print(type(test_flows))
         print(test_flows)
         all_test_flows.extend(test_flows)
         
