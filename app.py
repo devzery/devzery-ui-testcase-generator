@@ -4,10 +4,9 @@ from bs4 import BeautifulSoup
 import os
 import requests
 import tiktoken as tiktoken
-from flask import Flask, jsonify
+from flask import Flask, jsonify ,request
 from dotenv import load_dotenv
 from flask_cors import CORS
-from dummyhtmldata import html
 import json
 from crew_utils import TestCrew
 
@@ -17,29 +16,22 @@ app = Flask(__name__)
 
 CORS(app)
 
-@app.route('/htmlagent',methods=['GET'])
+
+@app.route('/htmlagent',methods=['POST'])
 def htmlagent():
-    cl_html = clean_html(html)
+    all_test_flows = []
+    request_data = request.get_json()  
+    if request_data and 'html' in request_data:
+        html_str = request_data['html']  
+    else:
+        return jsonify({"error": "Missing 'html' key in the request payload"}), 400
+    
+    cl_html = clean_html(html_str)
     snippets = split_string(cl_html)
     print(len(snippets))
-  
-    all_test_flows = []
-
-    # for snippet in snippets:
-    #     crew = TestCrew(str(snippet)).kickoff_crew()
-    #     test_flows_str = crew.kickoff()
-    #     print(f"test_flows_str: {test_flows_str}")  # Debug line
-    #     try:
-    #         test_flows = json.loads(test_flows_str)
-    #     except json.JSONDecodeError:
-    #         # Split the string by the separators between the JSON objects and parse each one separately
-    #         test_flows = [json.loads(part) for part in test_flows_str.split('}{') if part]
-    #     all_test_flows.extend(test_flows)
-
     for snippet in snippets:
         crew = TestCrew(str(snippet)).kickoff_crew()
         test_flows_str = crew.kickoff()
-        # print(type(test_flows_str))
         print(test_flows_str)
         test_flows_str=extract_json_code(test_flows_str)
         # print(type(test_flows_str))

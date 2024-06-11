@@ -6,11 +6,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-GPT_DEPLOYMENT_NAME="gpt-4"
-
 llm = AzureChatOpenAI(
-    openai_api_version="2023-07-01-preview",
-    azure_deployment=GPT_DEPLOYMENT_NAME,
+    openai_api_version=os.getenv("openai_api_version"),
+    azure_deployment=os.getenv("DEPLOYMENT_NAME"),
     openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
     openai_api_type="azure",
@@ -18,10 +16,10 @@ llm = AzureChatOpenAI(
 
 embeddings_model = AzureOpenAIEmbeddings(
     openai_api_version="2023-08-01-preview",
-    deployment="DevzeryEmbeddings3-Large",
+    deployment=os.getenv("embeddings_deployment_name"),
     openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    azure_endpoint="https://devzery.openai.azure.com",
-)
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+) 
 
 class HTMLAgents():
     def summarizer_agent(self):

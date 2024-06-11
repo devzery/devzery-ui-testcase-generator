@@ -157,7 +157,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
+chromedriver.exe
 test.py
 
 
