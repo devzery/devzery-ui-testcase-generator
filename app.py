@@ -4,6 +4,8 @@ from flask import Flask, jsonify ,request
 from dotenv import load_dotenv
 from flask_cors import CORS
 import json
+import os
+from langchain_openai import AzureChatOpenAI
 from crew_utils import TestCrew
 
 
@@ -12,6 +14,13 @@ app = Flask(__name__)
 
 CORS(app)
 
+llm = AzureChatOpenAI(
+    openai_api_version=os.getenv("openai_api_version"),
+    azure_deployment=os.getenv("DEPLOYMENT_NAME"),
+    openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+    openai_api_type="azure",
+)
 
 @app.route('/htmlagent',methods=['POST'])
 def htmlagent():
@@ -24,14 +33,11 @@ def htmlagent():
     
     cl_html = clean_html(html_str)
     snippets = split_string(cl_html)
-    print(len(snippets))
     for snippet in snippets:
-        crew = TestCrew(str(snippet)).kickoff_crew()
+        crew = TestCrew(str(snippet),llm=llm).kickoff_crew()
         test_flows_str = crew.kickoff()
-        print(test_flows_str)
         test_flows_str=extract_json_code(test_flows_str)
         test_flows = json.loads(test_flows_str)
-        print(test_flows)
         all_test_flows.extend(test_flows)
         
     print(all_test_flows)

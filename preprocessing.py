@@ -35,6 +35,7 @@ def clean_html(html):
     return soup_str
 
 
+
 def split_string(input):
     """
     Splits a given input string into substrings of maximum length of x tokens.
@@ -47,7 +48,6 @@ def split_string(input):
     """
     length_to_split = 4000
     encoding = tiktoken.encoding_for_model('gpt-3.5-turbo')
-    num_tokens = len(encoding.encode(input))
     tokens = list(encoding.encode(input))
     substrings = []
     while tokens:
@@ -58,6 +58,8 @@ def split_string(input):
             substrings.append(encoding.decode(tokens[:length_to_split]))
             tokens = tokens[length_to_split:]
     return substrings
+
+
 
 
 def extract_json_code(text):

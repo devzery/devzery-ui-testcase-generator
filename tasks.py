@@ -1,9 +1,6 @@
 from textwrap import dedent
 from crewai import Task
 
-
-
-
 class TestHTMLTasks():
     def summarizing_task(self, agent, snippet):
         return Task(
@@ -56,12 +53,9 @@ Instructions:
 - Ensure that the test cases are comprehensive, covering all possible scenarios including positive,negative test cases and edge cases identified in the summary.
 - Structure the test cases in the following manner of list of dictionaries where each dictionary represents a test case:
 ```json
-[
     {{
-        "userflow_name": "User Flow Name",
         "test_cases": [
             {{
-                "test_case_id": "TC_id",
                 "test_case_description": "Test case description",
                 "dependencies": "List of dependencies",
                 "test_steps": "Steps to execute the test case",
@@ -69,9 +63,7 @@ Instructions:
             }},
             
         ]
-    }},
-    
-]
+    }}, 
 ```
 HTML:
 ----

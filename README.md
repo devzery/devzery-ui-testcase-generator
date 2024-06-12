@@ -1,5 +1,6 @@
 # [![N|Solid](https://static.wixstatic.com/media/8490f3_c39f7a1fe2684c5181ac6b59efc252b0~mv2.png/v1/fill/w_89,h_90,al_c,lg_1,q_85,enc_auto/8490f3_c39f7a1fe2684c5181ac6b59efc252b0~mv2.png)](https://www.devzery.com/) 
 
+
 # UI Test Case Generation Tool
 
 ## Overview
@@ -22,12 +23,9 @@ The application is created with Flask and interfaces with the Crew AI system to 
 - **Structured Output**: The final output is a well-structured JSON format as shown, making it easy to integrate with other testing frameworks or tools.
 
 ```json
-[
     {
-        "userflow_name": "User Flow Name",
         "test_cases": [
             {
-                "test_case_id": "TC_id",
                 "test_case_description": "Test case description",
                 "dependencies": "List of dependencies",
                 "test_steps": "Steps to execute the test case",
@@ -35,9 +33,7 @@ The application is created with Flask and interfaces with the Crew AI system to 
             },
             
         ]
-    },
-    
-]
+    }, 
 ```
 
 
@@ -50,6 +46,13 @@ To get started with the HTML Test Case Generation Tool, follow these steps:
 1. Clone the repository to your local machine
 2. Install the required dependencies by running `pip install -r requirements.txt`.
 3. Set up the necessary environment variables (e.g., AzureOpenAI API key(or any other Model provider like Anthropic, Gemini etc.), deployment names, endpoints etc.)
+  - For Azure OpenAI (as shown in `app.py`):
+    - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
+    - `DEPLOYMENT_NAME`: The name of your Azure OpenAI deployment
+    - `AZURE_OPENAI_ENDPOINT`: The endpoint URL for your Azure OpenAI deployment
+    - `openai_api_version`: The version of the OpenAI API (e.g., "2023-03-15-preview")
+  - For OpenAI (default):
+    - `OPENAI_API_KEY`: Your OpenAI API key
 4. Run the Flask application 
 5. Send a POST request to the `/htmlagent` endpoint with the HTML content you want to analyze in the request body. Here is the JSON Schema for the request Payload :
 
