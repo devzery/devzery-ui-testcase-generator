@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import json
 import os
-from langchain_openai import AzureChatOpenAI
 from crew_utils import TestCrew
 
 
@@ -13,14 +12,6 @@ load_dotenv()
 app = Flask(__name__)
 
 CORS(app)
-
-llm = AzureChatOpenAI(
-    openai_api_version=os.getenv("openai_api_version"),
-    azure_deployment=os.getenv("DEPLOYMENT_NAME"),
-    openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    openai_api_type="azure",
-)
 
 @app.route('/htmlagent',methods=['POST'])
 def htmlagent():
