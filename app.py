@@ -1,11 +1,10 @@
-from preprocessing import clean_html, split_string ,extract_json_code
+from src.preprocessing import clean_html, split_string ,extract_json_code
 import tiktoken as tiktoken
 from flask import Flask, jsonify ,request
 from dotenv import load_dotenv
 from flask_cors import CORS
 import json
-import os
-from crew_utils import TestCrew
+from src.crew_utils import TestCrew
 
 
 load_dotenv()

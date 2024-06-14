@@ -5,24 +5,24 @@
 
 ## Outline
 
-This tool helps create well-defined and well-structured functional testcases based on the provided HTML content. This tool uses a crew of AI-agents to interpret the recieved HTML data, percieve UI components and features, understands, uses, and then curates a list of well-defined testcases. 
+This tool helps create well-defined and well-structured functional test cases based on the provided HTML content. This tool uses a crew of AI agents to interpret the received HTML data, perceive UI components and features, understand, use, and then curate a list of well-defined test cases. 
 
-This tool is built using Flask and communicates with the CrewAI workload to manage cooperation across an agentic crew. Also it uses a variety of additional libraries, such as BeautifulSoup, to parse and clean provided HTML content.
+This tool is built using Flask and communicates with the CrewAI workload to manage cooperation across an agentic crew. Also, it uses a variety of additional libraries, such as BeautifulSoup, to parse and clean provided HTML content.
 
 
 ## Features
 
 - **Compatibility** : This tool is compatible with any of the **Langchain Supported Models**
 
-- **Identification of Functionality** : As per the structure of the provided HTML, the tool understands the expected usecase and also keeping the context of webapp intact and even considers the possible user-interactions and prospects.
+- **Identification of Functionality** : As per the structure of the provided HTML, the tool understands the expected use case and also keeps the context of the web app intact, and even considers the possible user interactions and prospects.
 
-- **TestCase Generation** : Based upon all the different componets of HTML corpus comes a set of well-defined fucntional testcases.The AI agents understand crucial points like navigational flows, edgecases, user auths and access, data manipulation operations and dynamic content handling.
+- **TestCase Generation** : Based upon all the different components of the HTML corpus comes a set of well-defined functional test cases. The AI agents understand crucial points like navigational flows, cases, user auths and access, data manipulation operations, and dynamic content handling.
 
-- **Handling for Roles and Permissions** : The tool considers into account the user's roles and various levels of approval and access.
+- **Handling for Roles and Permissions** : The tool takes into account the user's roles and various levels of approval and access.
 
-- **Edge Cases** : The boundary conditions and potential edgecases are percieved.
+- **Edge Cases** : The boundary conditions and potential edge cases are perceived.
 
-- **Output**: A JSON schema is defined as illustrated. The final output consists a well-structrued JSON following the shown schema.
+- **Output**: A JSON schema is defined as illustrated. The final output consists of a well-structured JSON following the shown schema.
 
 ```json
     {
@@ -76,18 +76,18 @@ source myenv/bin/activate
 ```
 
 
-4. This tool leverages use of LangChain. Using LangChain this tool is compatible with **any language model** that Langchain supports , for more information regarding LangChain please refer to the following documentation
+4. This tool leverages the use of LangChain. Using LangChain this tool is compatible with **any language model** that Langchain supports, for more information regarding LangChain please refer to the following documentation
 
 **(https://python.langchain.com/v0.2/docs/introduction/)**
 
 
-- After the dependencies are installed, set the required environment variables as per the Langchain Documentation.
+- After the dependencies are installed, set the required environment variables as per the langchain documentation.
 
-- We've used **OpenAI gpt-4-0125-preview** as the default LLM for the tool. If you would like to use the same, then set the OpenAI API key as environment variable:
+- We've used **OpenAI gpt-4-0125-preview** as the default LLM for the tool. If you would like to use the same, then set the OpenAI API key as an environment variable:
 OPENAI_API_KEY : "Your OpenAI API key" 
 
 
-5. To use any other LangChain model, instantiate a variable as per the langchain documentation for that model and pass this variable as a parameter to `TestCrew` Class Object in `app.py` file as shown below
+5. To use any other LangChain model, instantiate a variable as per the Langchain documentation for that model and pass this variable as a parameter to the `TestCrew` Class Object in the `app.py` file as shown below
 
 
 ```python
@@ -101,21 +101,21 @@ llm = ChatOpenAI(
 )
 @app.route('/htmlagent',methods=['POST'])
 
-    #.....Rest of the code remains the same
+    #.....The rest of the code remains the same
     
 
     for snippet in snippets:
         crew = TestCrew(str(snippet),llm=llm).kickoff_crew() #Pass your llm here
         
         
-    #Rest of the code remains the same.......
+    # The rest of the code remains the same.......
 ```
 
 
 Here is how you can use **ChatAnthropic LLM** for the application(https://python.langchain.com/v0.2/docs/integrations/platforms/anthropic/):
 
 
-- Run `pip install -U langchain-anthropic` To install dependencies (Please refer Langchain Docs).
+- Run `pip install -U langchain-anthropic` To install dependencies (Please refer to Langchain Docs).
 
 - Set up your necessary environment variables :
    - `ANTHROPIC_API_KEY`: Your Anthropic API key
@@ -127,23 +127,23 @@ from langchain_anthropic import ChatAnthropic
 
 llm = ChatAnthropic(model='claude-3-opus-20240229')
 
-#Code Continued....
+#Code Continued...
 ```
 
-- Pass `llm` as a parameter in `TestCrew` Class Object :
+- Pass `llm` as a parameter in the `TestCrew` Class Object :
 
 ```python
 #....Continued code 
 @app.route('/htmlagent',methods=['POST'])
 
-    #.....Rest of the code remains the same
+    #.....The rest of the code remains the same
     
 
     for snippet in snippets:
-        crew = TestCrew(str(snippet),llm=llm).kickoff_crew() #Pass your llm here
+        crew = TestCrew(str(snippet),llm=llm).kickoff_crew() #Pass your LLM here
         
         
-    #Rest of the code remains the same.......
+    # The rest of the code remains the same.......
 ```
 
 6. Run the Flask Application Server 
@@ -160,7 +160,7 @@ llm = ChatAnthropic(model='claude-3-opus-20240229')
 
 ## Contributing To the Project
 
-Being an opensource project, all your contributions are highly anticipated ! If you take interest in this and encounter any issues or have further suggestions for improvements, please do open an issue or submit a Pull Request. Do make sure to follow the Project's coding conventions.
+Being an open-source project, all your contributions are highly anticipated! If you take an interest in this and encounter any issues or have further suggestions for improvements, please open an issue or submit a pull request. Do make sure to follow the Project's coding conventions.
 
 To contribute to this project,
 

@@ -23,7 +23,7 @@ class TestCrew:
         HTMLSnippet (str): The HTML snippet used by the crew.
 
     Methods:
-        kickoff_crew: Starts the crew and returns the crew object.
+        kickoff_crew: Initialises the crew and returns the crew object.
 
     """
  
@@ -40,7 +40,7 @@ class TestCrew:
 
     def kickoff_crew(self):
         """
-        Starts the crew and returns the crew object.
+        Initialises the crew and returns the crew object.
 
         Returns:
             Crew: The crew object.
